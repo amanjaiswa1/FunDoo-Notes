@@ -76,3 +76,23 @@ export const updateNote = async (req, res, next) => {
     next(error);
   }
 };
+
+
+/**
+ * Controller to delete note by _id
+ * @param  {object} req - request object
+ * @param {object} res - response object
+ * @param {Function} next
+ */
+ export const deleteNote = async (req, res, next) => {
+  try {
+    const data = await NoteService.deleteNote(req.params._id);
+    res.status(HttpStatus.CREATED).json({
+      code: HttpStatus.CREATED,
+      data: data,
+      message: 'Note deleted successfully'
+    });
+  } catch (error) {
+    next(error);
+  }
+};
