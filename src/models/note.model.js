@@ -13,11 +13,13 @@ const userSchema = new Schema(
         Color: {
             type: String
         },
-        isArchived: {
-            type: Boolean
+        isArchive: {
+            type: Boolean,
+            default: false
         },
-        isDeleted: {
-            type: Boolean
+        isTrash: {
+            type: Boolean,
+            default: false
         },
         UserID: {
             type: String

@@ -96,3 +96,23 @@ export const updateNote = async (req, res, next) => {
     next(error);
   }
 };
+
+
+/**
+ * Controller to update note as archive
+ * @param  {object} req - request object
+ * @param {object} res - response object
+ * @param {Function} next
+ */
+ export const archiveNote = async (req, res, next) => {
+  try {
+    const data = await NoteService.archiveNote(req.params._id, req.body);
+    res.status(HttpStatus.CREATED).json({
+      code: HttpStatus.CREATED,
+      data: data,
+      message: 'Note updated successfully as archive'
+    });
+  } catch (error) {
+    next(error);
+  }
+};
