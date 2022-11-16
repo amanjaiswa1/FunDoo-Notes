@@ -116,3 +116,22 @@ export const updateNote = async (req, res, next) => {
     next(error);
   }
 };
+
+/**
+ * Controller to update note as trash
+ * @param  {object} req - request object
+ * @param {object} res - response object
+ * @param {Function} next
+ */
+ export const trashNote = async (req, res, next) => {
+  try {
+    const data = await NoteService.trashNote(req.params._id, req.body);
+    res.status(HttpStatus.CREATED).json({
+      code: HttpStatus.CREATED,
+      data: data,
+      message: 'Note updated successfully as trash'
+    });
+  } catch (error) {
+    next(error);
+  }
+};
