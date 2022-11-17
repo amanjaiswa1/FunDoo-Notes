@@ -125,7 +125,7 @@ export const archiveNote = async (req, res, next) => {
  */
 export const trashNote = async (req, res, next) => {
   try {
-    const data = await NoteService.trashNote(req.params._id);
+    const data = await NoteService.trashNote(req.params._id, req.body.userID);
     res.status(HttpStatus.CREATED).json({
       code: HttpStatus.CREATED,
       data: data,

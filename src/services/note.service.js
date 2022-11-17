@@ -66,8 +66,8 @@ export const archiveNote = async (_id, userID) => {
 };
 
 //update note as trash
-export const trashNote = async (_id) => {
-  let note = await Note.findById(_id);
+export const trashNote = async (_id, userID) => {
+  let note = await Note.findById({ _id: _id, userID: userID });
   let trashStatus = false;
 
   if (note.isTrash == true) {
