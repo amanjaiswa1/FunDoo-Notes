@@ -84,7 +84,7 @@ export const updateNote = async (req, res, next) => {
  * @param {object} res - response object
  * @param {Function} next
  */
- export const deleteNote = async (req, res, next) => {
+export const deleteNote = async (req, res, next) => {
   try {
     const data = await NoteService.deleteNote(req.params._id);
     res.status(HttpStatus.CREATED).json({
@@ -104,7 +104,7 @@ export const updateNote = async (req, res, next) => {
  * @param {object} res - response object
  * @param {Function} next
  */
- export const archiveNote = async (req, res, next) => {
+export const archiveNote = async (req, res, next) => {
   try {
     const data = await NoteService.archiveNote(req.params._id);
     res.status(HttpStatus.CREATED).json({
@@ -123,7 +123,7 @@ export const updateNote = async (req, res, next) => {
  * @param {object} res - response object
  * @param {Function} next
  */
- export const trashNote = async (req, res, next) => {
+export const trashNote = async (req, res, next) => {
   try {
     const data = await NoteService.trashNote(req.params._id);
     res.status(HttpStatus.CREATED).json({

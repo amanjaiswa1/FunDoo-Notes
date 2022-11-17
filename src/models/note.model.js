@@ -21,7 +21,7 @@ const userSchema = new Schema(
             type: Boolean,
             default: false
         },
-        UserID: {
+        userID: {
             type: String
         }
     },
