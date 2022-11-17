@@ -43,13 +43,13 @@ export const deleteNote = async (_id) => {
 export const archiveNote = async (_id) => {
   let note = await Note.findById(_id);
   let archiveStatus = false;
-  
-    if (note.isArchive == true) {
-      archiveStatus ;
-    }
-    else {
-      archiveStatus = true;
-    }
+
+  if (note.isArchive == true) {
+    archiveStatus;
+  }
+  else {
+    archiveStatus = true;
+  }
 
   let update = { isArchive: archiveStatus };
   const data = await Note.findByIdAndUpdate(
@@ -65,8 +65,18 @@ export const archiveNote = async (_id) => {
 };
 
 //update note as trash
-export const trashNote = async (_id, update) => {
-  var update = { isTrash: true };
+export const trashNote = async (_id) => {
+  let note = await Note.findById(_id);
+  let trashStatus = false;
+
+  if (note.isTrash == true) {
+    trashStatus;
+  }
+  else {
+    trashStatus = true;
+  }
+
+  var update = { isTrash: trashStatus };
   const data = await Note.findByIdAndUpdate(
     {
       _id
