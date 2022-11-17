@@ -41,8 +41,8 @@ export const deleteNote = async (_id, userID) => {
 };
 
 //update note as archive
-export const archiveNote = async (_id) => {
-  let note = await Note.findOne(_id);
+export const archiveNote = async (_id, userID) => {
+  let note = await Note.findOne({ _id: _id, userID: userID });
   let archiveStatus = false;
 
   if (note.isArchive == true) {
