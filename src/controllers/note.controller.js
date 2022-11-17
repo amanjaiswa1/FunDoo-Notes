@@ -28,7 +28,7 @@ export const createNote = async (req, res, next) => {
  */
 export const getAllNotes = async (req, res, next) => {
   try {
-    const data = await NoteService.getAllNotes();
+    const data = await NoteService.getAllNotes(req.body.userID);
     res.status(HttpStatus.CREATED).json({
       code: HttpStatus.CREATED,
       data: data,
