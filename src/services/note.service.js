@@ -23,7 +23,8 @@ export const getNoteByID = async (_id, userID) => {
 export const updateNote = async (_id, body) => {
   const data = await Note.findOneAndUpdate(
     {
-      _id
+      _id: _id,
+      userID: body.userID
     },
     body,
     {
