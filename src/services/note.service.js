@@ -1,3 +1,4 @@
+import { boolean } from '@hapi/joi';
 import Note from '../models/note.model';
 
 //create a new note
@@ -39,8 +40,18 @@ export const deleteNote = async (_id) => {
 };
 
 //update note as archive
-export const archiveNote = async (_id, update) => {
-  var update = { isArchive: true };
+export const archiveNote = async (_id) => {
+  let note = await Note.findById(_id);
+  let archiveStatus = false;
+  
+    if (note.isArchive == true) {
+      archiveStatus ;
+    }
+    else {
+      archiveStatus = true;
+    }
+
+  let update = { isArchive: archiveStatus };
   const data = await Note.findByIdAndUpdate(
     {
       _id

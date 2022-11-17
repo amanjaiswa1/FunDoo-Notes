@@ -106,7 +106,7 @@ export const updateNote = async (req, res, next) => {
  */
  export const archiveNote = async (req, res, next) => {
   try {
-    const data = await NoteService.archiveNote(req.params._id, req.body);
+    const data = await NoteService.archiveNote(req.params._id);
     res.status(HttpStatus.CREATED).json({
       code: HttpStatus.CREATED,
       data: data,
