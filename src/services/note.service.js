@@ -10,13 +10,23 @@ export const createNote = async (body) => {
 //get all notes
 export const getAllNotes = async (userID) => {
   const data = await Note.find({ userID: userID });
-  return data;
+  if (data.length != 0) {
+    return data;
+  }
+  else {
+    throw new Error("No Notes are available with this User ID");
+  }
 };
 
 //get note by _id
 export const getNoteByID = async (_id, userID) => {
   const data = await Note.findOne({ _id: _id, userID: userID });
-  return data;
+  if (data != null) {
+    return data;
+  }
+  else {
+    throw new Error("Note ID is not available with this User ID");
+  }
 };
 
 //update note by _id
@@ -31,13 +41,23 @@ export const updateNote = async (_id, body) => {
       new: true
     }
   );
-  return data;
+  if (data != null) {
+    return data;
+  }
+  else {
+    throw new Error("Note ID is not available with this User ID");
+  }
 };
 
 //delete note by _id
 export const deleteNote = async (_id, userID) => {
   const data = await Note.findOneAndDelete({ _id: _id, userID: userID });
-  return data;
+  if (data != null) {
+    return data;
+  }
+  else {
+    throw new Error("Note ID is not available with this User ID");
+  }
 };
 
 //update note as archive
