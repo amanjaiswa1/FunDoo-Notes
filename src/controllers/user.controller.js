@@ -45,7 +45,7 @@ export const login = async (req, res, next) => {
  * @param {object} res - response object
  * @param {Function} next
  */
- export const forgotPassword = async (req, res, next) => {
+export const forgotPassword = async (req, res, next) => {
   try {
     const data = await UserService.forgotPassword(req.body);
     res.status(HttpStatus.ACCEPTED).json({
@@ -64,7 +64,7 @@ export const login = async (req, res, next) => {
  * @param {object} res - response object
  * @param {Function} next
  */
- export const resetPassword = async (req, res, next) => {
+export const resetPassword = async (req, res, next) => {
   try {
     const data = await UserService.resetPassword(req.body);
     res.status(HttpStatus.ACCEPTED).json({
