@@ -1,8 +1,10 @@
 import { boolean } from '@hapi/joi';
 import Note from '../models/note.model';
+import { client } from '../config/redis';
 
 //create a new note
 export const createNote = async (body) => {
+  await client.del('getAllData');
   const data = await Note.create(body);
   return data;
 };
@@ -10,6 +12,7 @@ export const createNote = async (body) => {
 //get all notes
 export const getAllNotes = async (userID) => {
   const data = await Note.find({ userID: userID });
+  await client.set(('getAllData'), JSON.stringify(data));
   if (data.length != 0) {
     return data;
   }
