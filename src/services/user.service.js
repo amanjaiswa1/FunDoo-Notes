@@ -1,7 +1,8 @@
 import User from '../models/user.model';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { sendMail } from '../utils/user.util'
+import { sendMail } from '../utils/user.util';
+import { client } from '../config/redis';
 
 
 //create a new user registration
@@ -17,6 +18,7 @@ export const registration = async (body) => {
 //user login
 export const login = async (body) => {
   const data = await User.findOne({ Email: body.Email });
+  await client.del('getAllData');
   if (data != null) {
     const result = await bcrypt.compare(body.Password, data.Password);
     if (result) {
