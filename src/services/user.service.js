@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { sendMail } from '../utils/user.util';
 import { client } from '../config/redis';
+import { sender } from '../utils/rabbitmq';
 
 
 //create a new user registration
@@ -12,6 +13,8 @@ export const registration = async (body) => {
   const hash = bcrypt.hashSync(body.Password, salt);
   body.Password = hash;
   const data = await User.create(body);
+  const registeredData = JSON.stringify({ FirstName: data.FirstName, LastName: data.LastName, Email: data.Email })
+  sender(registeredData);
   return data;
 };
 
