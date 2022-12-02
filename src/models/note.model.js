@@ -19,6 +19,10 @@ const userSchema = new Schema(
             type: Boolean,
             default: false
         },
+        Pinned: {
+            type: Boolean,
+            default: false
+        },
         userID: {
             type: String
         }
