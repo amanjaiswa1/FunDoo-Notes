@@ -27,4 +27,7 @@ router.put('/:_id/isArchive', userAuth, noteController.archiveNote);
 //route to update note as trash
 router.put('/:_id/isTrash', userAuth, noteController.trashNote);
 
+//route to update note as pinned
+router.put('/:_id/Pinned', userAuth, noteController.pinNote);
+
 export default router;

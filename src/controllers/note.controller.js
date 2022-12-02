@@ -110,7 +110,7 @@ export const archiveNote = async (req, res, next) => {
     res.status(HttpStatus.CREATED).json({
       code: HttpStatus.CREATED,
       data: data,
-      message: 'Note updated successfully as archive'
+      message: 'Note archive status updated successfully'
     });
   } catch (error) {
     next(error);
@@ -129,7 +129,26 @@ export const trashNote = async (req, res, next) => {
     res.status(HttpStatus.CREATED).json({
       code: HttpStatus.CREATED,
       data: data,
-      message: 'Note updated successfully as trash'
+      message: 'Note trash status updated successfully'
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+/**
+ * Controller to update note as Pinned
+ * @param  {object} req - request object
+ * @param {object} res - response object
+ * @param {Function} next
+ */
+ export const pinNote = async (req, res, next) => {
+  try {
+    const data = await NoteService.pinNote(req.params._id, req.body.userID);
+    res.status(HttpStatus.CREATED).json({
+      code: HttpStatus.CREATED,
+      data: data,
+      message: 'Note pinned status updated successfully'
     });
   } catch (error) {
     next(error);
