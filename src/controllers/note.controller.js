@@ -173,3 +173,22 @@ export const trashNote = async (req, res, next) => {
     next(error);
   }
 };
+
+/**
+ * Controller to remove note collaborator
+ * @param  {object} req - request object
+ * @param {object} res - response object
+ * @param {Function} next
+ */
+ export const removeCollaborator = async (req, res, next) => {
+  try {
+    const data = await NoteService.removeCollaborator(req.params._id, req.body);
+    res.status(HttpStatus.CREATED).json({
+      code: HttpStatus.CREATED,
+      data: data,
+      message: 'Note collaborator removed successfully'
+    });
+  } catch (error) {
+    next(error);
+  }
+};

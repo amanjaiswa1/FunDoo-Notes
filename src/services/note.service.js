@@ -169,3 +169,29 @@ export const collaborator = async (_id, body) => {
     }
   }
 };
+
+//remove collaborator 
+export const removeCollaborator = async (_id, body) => {
+  await client.del('getAllData');
+  const emailMatch = await User.find({ Email: body.Collaborator });
+  if (emailMatch.length != null) {
+    const data = await Note.findOneAndUpdate(
+      {
+        _id: _id,
+        userID: body.userID
+      },
+      {
+        $pull: { Collaborator: body.Collaborator }
+      },
+      {
+        new: true
+      }
+    );
+    if (data != null) {
+      return data;
+    }
+  }
+  else {
+    throw new Error("Note ID is not available with this User ID");
+  }
+};
