@@ -1,5 +1,6 @@
 import Joi from '@hapi/joi';
 
+//create new note 
 export const noteValidator = (req, res, next) => {
   const schema = Joi.object({
     Title: Joi.string().required(),
@@ -15,6 +16,7 @@ export const noteValidator = (req, res, next) => {
   }
 };
 
+//update note
 export const noteUpdateValidator = (req, res, next) => {
   const schema = Joi.object({
     Title: Joi.string().min(2),
@@ -26,6 +28,20 @@ export const noteUpdateValidator = (req, res, next) => {
     next(error);
   } else {
     req.validatedBody = value;
+    next();
+  }
+};
+
+//add note collaborator
+export const collaboratorValidator = (req, res, next) => {
+  const schema = Joi.object({
+    Collaborator: Joi.string().email()
+  });
+  const { error, value } = schema.validate(req.body);
+  if (error) {
+    next(error);
+  } else {
+     req.validatedBody = value;
     next();
   }
 };
