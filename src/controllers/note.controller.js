@@ -142,7 +142,7 @@ export const trashNote = async (req, res, next) => {
  * @param {object} res - response object
  * @param {Function} next
  */
- export const pinNote = async (req, res, next) => {
+export const pinNote = async (req, res, next) => {
   try {
     const data = await NoteService.pinNote(req.params._id, req.body.userID);
     res.status(HttpStatus.CREATED).json({
@@ -156,14 +156,14 @@ export const trashNote = async (req, res, next) => {
 };
 
 /**
- * Controller to update note as Pinned
+ * Controller to add note collaborator
  * @param  {object} req - request object
  * @param {object} res - response object
  * @param {Function} next
  */
- export const collaborator = async (req, res, next) => {
+export const addCollaborator = async (req, res, next) => {
   try {
-    const data = await NoteService.collaborator(req.params._id, req.body);
+    const data = await NoteService.addCollaborator(req.params._id, req.body);
     res.status(HttpStatus.CREATED).json({
       code: HttpStatus.CREATED,
       data: data,
@@ -180,7 +180,7 @@ export const trashNote = async (req, res, next) => {
  * @param {object} res - response object
  * @param {Function} next
  */
- export const removeCollaborator = async (req, res, next) => {
+export const removeCollaborator = async (req, res, next) => {
   try {
     const data = await NoteService.removeCollaborator(req.params._id, req.body);
     res.status(HttpStatus.CREATED).json({

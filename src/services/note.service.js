@@ -145,10 +145,10 @@ export const pinNote = async (_id, userID) => {
 };
 
 //add collaborator 
-export const collaborator = async (_id, body) => {
+export const addCollaborator = async (_id, body) => {
   await client.del('getAllData');
-  const emailMatch = await User.find({ Email: body.Collaborator });
-  if (emailMatch.length != null) {
+  const emailMatch = await User.findOne({ Email: body.Collaborator });
+  if (emailMatch != null) {
     const data = await Note.findOneAndUpdate(
       {
         _id: _id,
@@ -167,6 +167,9 @@ export const collaborator = async (_id, body) => {
     else {
       throw new Error("Note ID is not available with this User ID");
     }
+  }
+  else {
+    throw new Error("Invalid Email");
   }
 };
 

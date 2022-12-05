@@ -31,7 +31,7 @@ router.put('/:_id/isTrash', userAuth, noteController.trashNote);
 router.put('/:_id/Pinned', userAuth, noteController.pinNote);
 
 //route to add collaborator
-router.put('/:_id/collaborate', collaboratorValidator, userAuth, noteController.collaborator);
+router.put('/:_id/addCollaborator', collaboratorValidator, userAuth, noteController.addCollaborator);
 
 //route to remove collaborator
 router.put('/:_id/removeCollaborator', collaboratorValidator, userAuth, noteController.removeCollaborator);
