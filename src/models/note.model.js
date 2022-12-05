@@ -25,7 +25,10 @@ const userSchema = new Schema(
         },
         userID: {
             type: String
-        }
+        },
+        Collaborator: [{
+            type: String
+        }]
     },
     {
         timestamps: true
