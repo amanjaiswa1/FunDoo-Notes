@@ -154,3 +154,22 @@ export const trashNote = async (req, res, next) => {
     next(error);
   }
 };
+
+/**
+ * Controller to update note as Pinned
+ * @param  {object} req - request object
+ * @param {object} res - response object
+ * @param {Function} next
+ */
+ export const collaborator = async (req, res, next) => {
+  try {
+    const data = await NoteService.collaborator(req.params._id, req.body);
+    res.status(HttpStatus.CREATED).json({
+      code: HttpStatus.CREATED,
+      data: data,
+      message: 'Note collaborator added successfully'
+    });
+  } catch (error) {
+    next(error);
+  }
+};

@@ -1,5 +1,6 @@
 import { boolean } from '@hapi/joi';
 import Note from '../models/note.model';
+import User from '../models/user.model'
 import { client } from '../config/redis';
 
 //create a new note
@@ -141,4 +142,30 @@ export const pinNote = async (_id, userID) => {
     }
   );
   return data;
+};
+
+//add collaborator 
+export const collaborator = async (_id, body) => {
+  await client.del('getAllData');
+  const emailMatch = await User.find({ Email: body.Collaborator });
+  if (emailMatch.length != null) {
+    const data = await Note.findOneAndUpdate(
+      {
+        _id: _id,
+        userID: body.userID
+      },
+      {
+        $push: { Collaborator: body.Collaborator }
+      },
+      {
+        new: true
+      }
+    );
+    if (data != null) {
+      return data;
+    }
+    else {
+      throw new Error("Note ID is not available with this User ID");
+    }
+  }
 };
