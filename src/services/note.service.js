@@ -155,7 +155,7 @@ export const addCollaborator = async (_id, body) => {
         userID: body.userID
       },
       {
-        $push: { Collaborator: body.Collaborator }
+        $addToSet: { Collaborator: body.Collaborator }
       },
       {
         new: true
