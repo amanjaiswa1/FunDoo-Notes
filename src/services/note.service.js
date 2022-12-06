@@ -176,12 +176,13 @@ export const addCollaborator = async (_id, body) => {
 //remove collaborator 
 export const removeCollaborator = async (_id, body) => {
   await client.del('getAllData');
-  const emailMatch = await User.find({ Email: body.Collaborator });
-  if (emailMatch.length != null) {
+  const emailMatch = await Note.findOne({ _id: _id, Collaborator: body.Collaborator });
+  if (emailMatch != null) {
     const data = await Note.findOneAndUpdate(
       {
         _id: _id,
-        userID: body.userID
+        userID: body.userID,
+        Collaborator: body.Collaborator
       },
       {
         $pull: { Collaborator: body.Collaborator }
@@ -190,11 +191,9 @@ export const removeCollaborator = async (_id, body) => {
         new: true
       }
     );
-    if (data != null) {
-      return data;
-    }
+    return data;
   }
   else {
-    throw new Error("Note ID is not available with this User ID");
+    throw new Error("This Email is not available in Collaborator");
   }
 };
