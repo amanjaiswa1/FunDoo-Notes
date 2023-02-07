@@ -1,5 +1,6 @@
 import HttpStatus from 'http-status-codes';
 import * as UserService from '../services/user.service';
+import logger from '../config/logger';
 
 /**
  * Controller to create a new user registration
@@ -15,8 +16,13 @@ export const registration = async (req, res, next) => {
       data: data,
       message: 'User created successfully'
     });
+    logger.info('User created successfully');
   } catch (error) {
-    next(error);
+    res.status(HttpStatus.BAD_REQUEST).json({
+      code: HttpStatus.BAD_REQUEST,
+      message: `${error}`
+    });
+    logger.error(error);
   }
 };
 
@@ -34,8 +40,13 @@ export const login = async (req, res, next) => {
       data: data,
       message: 'User login successfully'
     });
+    logger.info('User login successfully');
   } catch (error) {
-    next(error);
+    res.status(HttpStatus.BAD_REQUEST).json({
+      code: HttpStatus.BAD_REQUEST,
+      message: `${error}`
+    });
+    logger.error(error);
   }
 };
 
@@ -53,8 +64,13 @@ export const forgotPassword = async (req, res, next) => {
       data: data,
       message: 'Reset link sent successfully'
     });
+    logger.info('Reset link sent successfully');
   } catch (error) {
-    next(error);
+    res.status(HttpStatus.BAD_REQUEST).json({
+      code: HttpStatus.BAD_REQUEST,
+      message: `${error}`
+    });
+    logger.error(error);
   }
 };
 
@@ -72,7 +88,12 @@ export const resetPassword = async (req, res, next) => {
       data: data,
       message: 'Password updated successfully'
     });
+    logger.info('Password updated successfully');
   } catch (error) {
-    next(error);
+    res.status(HttpStatus.BAD_REQUEST).json({
+      code: HttpStatus.BAD_REQUEST,
+      message: `${error}`
+    });
+    logger.error(error);
   }
 };
